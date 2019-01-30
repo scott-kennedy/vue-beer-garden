@@ -1,0 +1,63 @@
+type Query {
+  beer: Beer
+  beers: [Beer]
+}
+
+type Beer {
+  id: ID!
+  name: String
+  tagline: String
+  first_brewed: String
+  description: String
+  image_url: String
+  abv: Float
+  ibu: Float
+  target_fg: Float
+  target_og: Float
+  ebc: Float
+  srm: Float
+  ph: Float
+  attenuation_level: Float
+  volume: Measurement
+  boil_volume: Measurement
+  method: BrewMethod
+  ingredients: Ingredients
+  food_pairing: [String]
+  brewers_tips: String
+  contributed_by: String
+}
+
+type Ingredients {
+  malt: [Malt]
+  hops: [Hops]
+  yeast: String
+}
+
+type BrewMethod {
+  # Maybe break mash_temp into a TemperatureMeasurementDuration since it's the only thing that includes duration
+  mash_temp: [TemperatureMeasurement]
+  fermentation: TemperatureMeasurement
+  twist: String
+}
+
+type TemperatureMeasurement {
+  temp: Measurement
+  duration: Float
+}
+
+type Measurement {
+  value: Float
+  unit: String
+}
+
+type Malt {
+  name: String
+  amount: Measurement
+}
+
+type Hops {
+  name: String
+  amount: Measurement
+  add: String
+  attribute: String
+}
